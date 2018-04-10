@@ -1,0 +1,23 @@
+Soal No.3:
+
+query mongoDB:
+
+1. use campus
+
+2. db.createUser({user:"andi",pwd:"anditopsecret",roles:["readWrite","dbAdmin"]});
+
+3. db.createUser({user:"budi",pwd:"buditopsecret",roles:["readWrite"]});
+
+4. db.createCollection('dosen');
+
+5. db.createCOllection('mahasiswa');
+
+6. show collections //memastikan aja collection sudah dibuat.
+
+7. db.dosen.insert({nama:"caca",usia:28,asal:"jakarta",bidang:"fisika astrologi",title:"S2",status:"honorer",nip:123,matkul:["metrologi","kosmologi","Kalkulus"]});
+   db.dosen.insert({nama:"dedi",usia:29,asal:"yogyakarta",bidang:"fisika terapan",title:"S3",status:"PNS",nip:456,matkul:["instrumentasi","elektronika","fisika dasar"]});  
+   db.dosen.insert({nama:"euis",usia:30,asal:"bandung",bidang:"fisika teoritik",title:"S1",status:"honorer",nip:789,matkul:["fisika dasar","fisika modern","Kalkulus"]});
+
+8. db.mahasiswa.insert({nama:"faza",usia:19,asal:"aceh",prodi:"fisika",angkatan:2017,nim:123});
+   db.mahasiswa.insert({nama:"gilang",usia:20,asal:"semarang",prodi:"fisika",angkatan:2017,nim:456});
+   db.mahasiswa.insert({nama:"hanafi",usia:19,asal:"surabaya",prodi:"fisika",angkatan:2017,nim:789});

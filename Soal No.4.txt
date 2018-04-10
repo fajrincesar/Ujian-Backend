@@ -1,0 +1,54 @@
+
+const express = require('express')
+const app = express();
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://andi:anditopsecret@localhost:27017/campus';
+
+MongoClient.connect(url, function(err, db){
+    console.log('connceted to mongodb')
+});
+
+app.get('/dosen', (req, res)=>{
+    MongoClient.connect(url, (err, db)=>{
+        var collection = db.collection('dosen');
+        collection.find({}).toArray((err, docs)=>{
+            console.log(docs);
+            res.send(docs);
+        });
+    });
+});
+
+app.get('/mahasiswa', (req, res)=>{
+    MongoClient.connect(url, (err, db)=>{
+        var collection = db.collection('mahasiswa');
+        collection.find({}).toArray((err, docs)=>{
+            console.log(docs);
+            res.send(docs);
+        });
+    });
+});
+
+app.get('/dnama/:nama', (req, res)=>{
+    MongoClient.connect(url, (err, db)=>{
+        var collection = db.collection('dosen');
+        collection.find({nama:req.params.nama}).toArray((err, docs)=>{
+            console.log(docs);
+            res.send(docs);
+        });
+    });
+});
+
+app.get('/mnama/:nama', (req, res)=>{
+    MongoClient.connect(url, (err, db)=>{
+        var collection = db.collection('mahasiswa');
+        collection.find({nama:req.params.nama}).toArray((err, docs)=>{
+            console.log(docs);
+            res.send(docs);
+        });
+    });
+});
+
+app.listen(7000, ()=>{
+    console.log('server run on 7000')
+})
