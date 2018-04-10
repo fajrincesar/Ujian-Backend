@@ -1,0 +1,31 @@
+1. create database restorant;
+
+2. use restorant;
+
+3. create table master(id_master int not null, nama varchar(30), primary key (id_master));
+
+4. insert into master values(4001, food),(4002, bavarages),(4003, restoran),(4004, karyawan));
+
+5. create table karyawan (id_karyawan int not null, nama varchar(30), gender varchar(10), jabatan varchar(10), gaji int, id_master int, primary key(id_karyawan));
+
+6. insert into karyawan values(5001,'chaca','female','cheff',500,4004),(5002,'dina','female','cashier',300,4004),(5003,'ayu','female','cs',250,4004));
+
+7. create table restoran (id_resto int not null, namaresto varchar(30), cabang enum('jkt','bdg','yogya'),id_master int, primary key(id_resto));
+
+8. insert into restoran values(6001,'a&k','jkt',4003),(6002,'McB','bdg',4003),(6003,'ofc','yogya',4003));
+
+9. create table stock (id_stock int not null, namabarang varchar(30), satuan varchar(30), primary key (id_stock));
+
+10.insert into stock values(9001,'gandum','10kg'),(9002,'tepung','15kg'),(9003,'beras','20kg'));
+
+11. create table food (id_food int not null, food varchar(30), harga int, deskripsi text, id_master int, id_resto int primary key (id_food));
+
+12. insert into food values(7001,'dessert',800,'food',4001,6001),(7002,'maincourse',900,'food',4001,6001),(7003,'aptezier',700,'food',4001,6001));
+
+13. create table bavarage (id_bav int not null, bavarage varchar(30), harga int, deskripsi text, id_master int, id_resto int primary key (id_bav));
+
+14. insert into bavarage values(8001,'coffe',200,'kopi pahit',4002,6001),(8002,'tea',100,'teh manis',4002,6002),(8003,'juice',400,'buahbuahan',4002,6003));
+
+15. select food, bavarage, namaresto, cabang from food, bavarage, restoran join master using (id_master);
+
+16. select * from karyawan, restoran join master using (id_master);

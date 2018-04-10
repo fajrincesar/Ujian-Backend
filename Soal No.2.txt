@@ -1,0 +1,75 @@
+const express = require('express');
+const app = express()
+var cors = require('cors');
+app.use(cors());
+var bodyParser = require('body-parser');
+const mysql = require('mysql');
+const db = mysql.createConnection({
+    host:'localhost',
+    user:'rin',
+    password:'rin121412',
+    database:'restorant'
+});
+db.connect();
+app.use(bodyParser.json());
+
+app.get('/f&b', function(req,res){ //view data all food&bavarage, nama resto dan cabag restonya
+    var sql = 'select food, bavarage, namaresto, cabang from food, bavarage, restoran join master using (id_master)';
+    db.query(sql, (err, result)=>{
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+    });
+});
+
+app.get('/karyawan', function(req,res){ //view data all karyawan beserta tempat tugas restoran dan cabangnya
+    var sql = 'select * from karyawan, restoran join master using (id_master)';
+    db.query(sql, (err, result)=>{
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+    });
+});
+
+app.get('/stock',(req,res)=>{ //view all data di tabel stock
+    var sql = 'select * from stock';
+    db.query(sql, (err,resp)=>{
+        if(err) throw err;
+        console.log(resp);
+        res.send(resp);
+    });
+});
+
+app.post('/input',(req,res)=>{ //insert data into databases
+    var data = {id_karyawan:5004,nama:"gebby",gender:"female",jabatan:"chef",gaji:800,id_master:4004};
+    var sql = 'insert into karyawan set ?';
+    db.query(sql, data, (err, result)=>{
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+    });
+});
+
+app.patch('/update',(req,res)=>{
+    var nama = 'chaca'
+    var sql = 'UPDATE karyawan SET nama = "icha" WHERE nama = ?';
+    db.query(sql,nama,(err,result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.send(result);
+    }); 
+});
+
+app.delete('/delete',(req,res)=>{
+    var nama= 'ayu'
+    var sql = 'delete from karyawan WHERE nama = ?';
+    db.query(sql, nama,(err,resut)=>{
+        if(err) throw err;
+        console.log(result);
+        res.send(result);
+    }); 
+});
+
+app.listen(500, ()=>{
+    console.log('server @port 500')
+});
